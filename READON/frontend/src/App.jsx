@@ -1,7 +1,8 @@
 
-import Navbar from './components/navbar/Navbar'
+import Navbar from './components/Navbar'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './page/home/Home'
+import {Toaster} from 'react-hot-toast' 
 
 
 
@@ -12,7 +13,8 @@ const App = () => {
     <div>
       
       {isSellerPath ? null :  <Navbar/>}
-        <div className={`${isSellerPath ? "" : 'px-6 md:px-16 lg:px-24 xl:px-32'}`}> 
+        <Toaster/>
+        <div className={`${isSellerPath ? "" : 'px-6 md:px-16 lg:px-24 xl:px-30'}`}> 
           <Routes>
             <Route path='/' element={<Home/>}/>
           </Routes>

@@ -69,7 +69,13 @@ import vanilla_muffins_image from "./vanilla_muffins_image.png";
 import quinoa_image from "./quinoa_image.png";
 import brown_rice_image from "./brown_rice_image.png";
 import barley_image from "./barley_image.png";
-
+import AcademicBooks from "./AcademicBooks.jpg";
+import StorytellingBooks from "./StorytellingBooks.jpg";
+import ExamPreparation from "./ExamPreparation.jpg";
+import ChildrenBooks from "./ChildrenBooks.jpg";
+import ReferenceMaterials from "./ReferenceMaterials.jpg";
+import FictionNovels from "./FictionNovels.jpg";
+import MagazinesJournals from "./MagazinesJournals.jpg";
 export const assets = {
   logos,
   search_icon,
@@ -102,48 +108,96 @@ export const assets = {
 
 export const categories = [
   {
-    text: "Organic veggies",
-    path: "Vegetables",
-    image: organic_vegitable_image,
+    text: "Storytelling Books",
+    path: "Storytelling",
+    image: StorytellingBooks,
     bgColor: "#FEF6DA",
   },
   {
-    text: "Fresh Fruits",
-    path: "Fruits",
-    image: fresh_fruits_image,
+    text: "Academic Books",
+    path: "Academic",
+    image: AcademicBooks,
     bgColor: "#FEE0E0",
   },
   {
-    text: "Cold Drinks",
-    path: "Drinks",
-    image: bottles_image,
+    text: "Exam Preparation",
+    path: "ExamPrep",
+    image: ExamPreparation,
     bgColor: "#F0F5DE",
   },
   {
-    text: "Instant Food",
-    path: "Instant",
-    image: maggi_image,
+    text: "Children's Books",
+    path: "Children",
+    image: ChildrenBooks,
     bgColor: "#E1F5EC",
   },
   {
-    text: "Dairy Products",
-    path: "Dairy",
-    image: dairy_product_image,
+    text: "Reference Materials",
+    path: "Reference",
+    image:  ReferenceMaterials,
     bgColor: "#FEE6CD",
   },
   {
-    text: "Bakery & Breads",
-    path: "Bakery",
-    image: bakery_image,
+    text: "Fiction & Novels",
+    path: "Fiction",
+    image: FictionNovels,
     bgColor: "#E0F6FE",
   },
   {
-    text: "Grains & Cereals",
-    path: "Grains",
-    image: grain_image,
+    text: "Magazines & Journals",
+    path: "Magazines",
+    image: MagazinesJournals,
     bgColor: "#F1E3F9",
   },
 ];
+
+
+// export const categories = [
+//   {
+//     text: "Organic veggies",
+//     path: "Vegetables",
+//     image: organic_vegitable_image,
+//     bgColor: "#FEF6DA",
+//   },
+//   {
+//     text: "Fresh Fruits",
+//     path: "Fruits",
+//     image: fresh_fruits_image,
+//     bgColor: "#FEE0E0",
+//   },
+//   {
+//     text: "Cold Drinks",
+//     path: "Drinks",
+//     image: bottles_image,
+//     bgColor: "#F0F5DE",
+//   },
+//   {
+//     text: "Instant Food",
+//     path: "Instant",
+//     image: maggi_image,
+//     bgColor: "#E1F5EC",
+//   },
+//   {
+//     text: "Dairy Products",
+//     path: "Dairy",
+//     image: dairy_product_image,
+//     bgColor: "#FEE6CD",
+//   },
+//   {
+//     text: "Bakery & Breads",
+//     path: "Bakery",
+//     image: bakery_image,
+//     bgColor: "#E0F6FE",
+//   },
+//   {
+//     text: "Grains & Cereals",
+//     path: "Grains",
+//     image: grain_image,
+//     bgColor: "#F1E3F9",
+//   },
+// ];
+
+
 
 export const footerLinks = [
   {
