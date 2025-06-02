@@ -16,7 +16,8 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
+        <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24
+         xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
             <NavLink to="/">
                 <img onClick={()=> setOpen(false)} className="h-9" src={assets.logos} alt="dummyLogoColored" />
             </NavLink>
@@ -47,8 +48,10 @@ const Navbar = () => {
                 </div>
 
                 {!user ? (<button onClick={() => {
+                    setOpen(false);
                      setShowUserLogin(true);}}
-                        className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
+                        className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition
+                         text-white rounded-full">
                         Login   
                     </button>
                 ) : (
@@ -56,7 +59,8 @@ const Navbar = () => {
                     <div  className='relative cursor-pointer group'>
                         <img src={assets.profile_icon} alt="profile_icon" className="w-10" 
                          onClick={()=> navigate('myProfile')}/>
-                        <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow-md rounded-lg w-48 text-sm text-gray-700">
+                        <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow-md 
+                        rounded-lg w-48 text-sm text-gray-700">
                               
                             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                             onClick={()=>navigate('myOrders')}>My Orders</li>
