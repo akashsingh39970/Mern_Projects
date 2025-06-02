@@ -13,28 +13,27 @@ export const AppContextProvider = ({children})=>{
     const [user, setUser] = useState(null)
     const [isSeller, setIsSeller] = useState(false)
     const [showUserLogin, setShowUserLogin] = useState(false)
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState(dummyProducts)
     const [cartItems, setCartItems] = useState({})
 
     // Function to fetch products (dummy data for now)
-    const fetchProducts = () => {
-        setProducts(dummyProducts)
-    }
-
-    useEffect(()=>{
-        console.log("AppContextProvider mounted");
-        fetchProducts();
-
-    },[])
+    
+   
 
     // Function to add item to cart
-    const addToCart = () =>{
+    const addToCart = (itemId) =>{
         let cartData = structuredClone(cartItems);
+       
+      
 
         if(cartData[itemId]){
             cartData[itemId] += 1;
         }else{
+              
             cartData[itemId] = 1;
+            
+            
+          
         }
         setCartItems(cartData);
         toast.success('Item added to cart successfully!');
@@ -51,10 +50,10 @@ export const AppContextProvider = ({children})=>{
     //Remove item from cart
     const removeFromCart = (itemId) => {
         let cartData = structuredClone(cartItems);
-        if(!cartData[itemId]){
+        if(cartData[itemId]){
             cartData[itemId] -= 1;
             if(cartData[itemId] === 0){
-                delete cartData[itemId];
+                delete cartData[itemId];    
             }
            
         }
@@ -65,7 +64,7 @@ export const AppContextProvider = ({children})=>{
     }
 
     const value={navigate, user, isSeller, setIsSeller, setUser,showUserLogin,
-        setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart}
+        setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems}
 
     return <AppContext.Provider value={value}> 
         {children}
