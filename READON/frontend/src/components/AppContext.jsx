@@ -13,27 +13,33 @@ export const AppContextProvider = ({children})=>{
     const [user, setUser] = useState(null)
     const [isSeller, setIsSeller] = useState(false)
     const [showUserLogin, setShowUserLogin] = useState(false)
-    const [products, setProducts] = useState(dummyProducts)
+    const [products, setProducts] = useState([])
     const [cartItems, setCartItems] = useState({})
+    const [searchQuery, setSearchQuery] = useState({})
+
+     
+
 
     // Function to fetch products (dummy data for now)
-    
-   
+    const fetchProducts = () => {
+        setProducts(dummyProducts)
+    }
+
+    useEffect(()=>{
+        console.log("AppContextProvider mounted");
+        fetchProducts();
+
+    },[])
 
     // Function to add item to cart
     const addToCart = (itemId) =>{
         let cartData = structuredClone(cartItems);
-       
-      
-
+  
         if(cartData[itemId]){
             cartData[itemId] += 1;
         }else{
-              
+           
             cartData[itemId] = 1;
-            
-            
-          
         }
         setCartItems(cartData);
         toast.success('Item added to cart successfully!');
@@ -62,10 +68,10 @@ export const AppContextProvider = ({children})=>{
 
        
     }
+     const value={navigate, user, isSeller, setIsSeller, setUser,showUserLogin,
+        setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems, searchQuery, setSearchQuery}
 
-    const value={navigate, user, isSeller, setIsSeller, setUser,showUserLogin,
-        setShowUserLogin, products, currency, addToCart, updateCartItem, removeFromCart, cartItems}
-
+  
     return <AppContext.Provider value={value}> 
         {children}
     </AppContext.Provider>

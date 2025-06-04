@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { assets } from "../assets/assets";
@@ -6,7 +6,7 @@ import { useAppContext } from "./AppContext";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
-    const { user, setUser, setShowUserLogin, navigate } = useAppContext();
+    const { user, setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery } = useAppContext();
 
     const handleLogout = () => {
         setUser(null);
@@ -14,6 +14,12 @@ const Navbar = () => {
         navigate("/"); // Redirect to home page after logout
         // Optionally, you can also redirect the user to the home page or login page
     };
+
+    useEffect(()=>{
+        if(searchQuery.length > 0){
+            navigate('/products')
+        }
+    }, [searchQuery])
 
     return (
         <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24
@@ -29,7 +35,7 @@ const Navbar = () => {
                 <NavLink to="">Contact</NavLink>
 
                 <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-                    <input
+                    <input onChange={(e)=> setSearchQuery(e.target.value)}
                         className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
                         type="text"
                         placeholder="Search products"
@@ -47,7 +53,7 @@ const Navbar = () => {
                     </button>
                 </div>
 
-                {!user ? (<button onClick={() => {
+                {!user ? (<button onClick={(e) => {
                     setOpen(false);
                      setShowUserLogin(true);}}
                         className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition
