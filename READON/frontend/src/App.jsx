@@ -9,6 +9,7 @@ import Login from './components/Login'
 import AllProducts from './page/AllProducts'
 import ProductCategory from './page/ProductCategory'
 import ProductDetails from './page/ProductDetails'
+import CartPage from './page/CartPage'
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
             <Route path='/products' element={<AllProducts/>}/>
             <Route path='/products/:category' element={<ProductCategory/>}/>
             <Route path='/products/:category/:id' element={<ProductDetails/>}/>
+            <Route path='/cart' element={<CartPage/>}/>
           </Routes>
         </div>
         {!isSellerPath && <Footer/>}
