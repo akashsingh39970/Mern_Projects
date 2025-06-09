@@ -73,6 +73,7 @@ export const AppContextProvider = ({ children }) => {
     const getTotalItems = () => {
         let totalItmes = 0;
         for (const item in cartItems) {
+           
             totalItmes += cartItems[item];
         }
         return totalItmes;
@@ -82,12 +83,14 @@ export const AppContextProvider = ({ children }) => {
     const getTotalItemsPrice = () => {
         let totalPrice = 0;
         for (const item in cartItems) {
+            // console.log(item);
             let itemInfo = products.find((product) => product._id === item);
             if (cartItems[item] > 0) {
                 totalPrice += itemInfo.offerPrice * cartItems[item];
             }
-            return Math.floor(totalPrice * 100) / 100; // Round to 2 decimal places
+
         }
+         return Math.floor(totalPrice * 100) / 100; // Round to 2 decimal places
     }
 
     // Function to navigate to a different page
