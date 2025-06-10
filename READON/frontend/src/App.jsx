@@ -12,12 +12,13 @@ import ProductDetails from './page/ProductDetails'
 import CartPage from './page/CartPage'
 import AddAddress from './page/AddAddress'
 import MyOrders from './page/MyOrders'
+import SellerLogin from './components/seller/SellerLogin'
 
 
 
 const App = () => {
   const isSellerPath = useLocation().pathname.includes('seller');
-  const {showUserLogin} = useAppContext();
+  const {showUserLogin, isSeller} = useAppContext();
 
   return (
     <div>
@@ -34,6 +35,10 @@ const App = () => {
             <Route path='/cart' element={<CartPage/>}/>
             <Route path='/addAddress' element={<AddAddress/>}/>
             <Route path='/myorders' element={<MyOrders/>}/>
+            <Route path='/seller' element={isSeller ? null : <SellerLogin/>}>
+              
+
+            </Route>
         
           </Routes>
         </div>
