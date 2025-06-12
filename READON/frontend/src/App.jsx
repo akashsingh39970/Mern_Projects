@@ -23,8 +23,8 @@ import Orders from './page/seller/Orders'
 const App = () => {
   const isSellerPath = useLocation().pathname.includes('seller');
   const {showUserLogin, isSeller} = useAppContext();
-
   return (
+    
     <div className='text-default min-h-screen text-gray-700 bg-white'>
       
       {isSellerPath ? null :  <Navbar/>}
@@ -39,7 +39,7 @@ const App = () => {
             <Route path='/cart' element={<CartPage/>}/>
             <Route path='/addAddress' element={<AddAddress/>}/>
             <Route path='/myorders' element={<MyOrders/>}/>
-            <Route path='/seller' element={isSeller ? <SellerLayout/>  : <SellerLayout/>}>
+            <Route path='/seller' element={isSeller ? <SellerLayout/>  : <SellerLogin/>}>
               <Route index element={isSeller ? <AddProduct/> : null}/>
               <Route path='productlist' element={<ProductList/>}/>
               <Route path='orders' element={<Orders/>}/>
