@@ -5,14 +5,14 @@ import { assets, dummyAddress } from "../assets/assets";
 const CartPage = () => {
     const [showAddress, setShowAddress] = useState(false)
     const [cartArray, setCartArray] = useState([]);
-    const [address, setAddress] = useState(dummyAddress);
-    const [selectedAddress, setSelectedAddress] = useState(dummyAddress[0]);
+    const [address, setAddress] = useState([]);
+    const [selectedAddress, setSelectedAddress] = useState(null);
     const [paymentMethod, setPaymentMethod] = useState("COD");
 
 
 
     const { products, currency, setProducts, updateCartItem, removeFromCart,
-        cartItems, getTotalItems, getTotalItemsPrice, navigate } = useAppContext();
+        cartItems, getTotalItems, getTotalItemsPrice, navigate, axios, toast, user, setCartItems } = useAppContext();
 
     const getCart = () => {
         let tempCart = [];
@@ -28,8 +28,67 @@ const CartPage = () => {
         setCartArray(tempCart);
     }
 
-    const placeOrder = () => {
-        console.log('hello');
+    //get user address by api
+    const getUserAddress = async () =>{
+        try {
+const { data } = await axios.get(`/api/address/get?userId=${user._id}`);
+            if(data.success){
+                setAddress(data.addresses )
+                if(data.addresses.length  > 0 ){
+                    setSelectedAddress(data.addresses[0])
+                }
+            }
+            else{
+                toast.error(data.message);
+            }
+            
+        } catch (error) {
+            toast.error(error.message);
+            
+        }
+    }
+
+    const placeOrder = async () => {
+        try {
+            if(!selectedAddress){
+                return toast.error('please select an address')
+            }
+
+            // payment mode type cod
+            if(paymentMethod === 'COD'){
+                const {data} = await axios.post('/api/order/cod', {
+                    userId: user._id,
+                    items: cartArray.map(item => ({product: item._id, quantity: item.quantity})),
+                    address: selectedAddress._id
+                })
+                if(data.success){
+                    toast.success(data.message)
+                    setCartItems({})
+                    navigate('/myorders')
+                }
+                else{
+                    toast.error(data.message)
+                }
+            }
+            else{
+                //pace order with stripe or online payment
+                 const {data} = await axios.post('/api/order/stripe', {
+                    userId: user._id,
+                    items: cartArray.map(item => ({product: item._id, quantity: item.quantity})),
+                    address: selectedAddress._id
+                })
+                if(data.success){
+                 window.location.replace(data.url)
+                 
+                }
+                else{
+                    toast.error(data.message)
+                }
+            }
+            
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
 
@@ -38,6 +97,12 @@ const CartPage = () => {
             getCart();
         }
     }, [products, cartItems])
+
+    useEffect(()=>{
+        if(user){ 
+            getUserAddress()
+        }
+    },[user])
 
 const totalPrice = getTotalItemsPrice();
 const tax = Number((totalPrice * 0.02).toFixed(2));

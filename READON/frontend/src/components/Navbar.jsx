@@ -6,13 +6,26 @@ import { useAppContext } from "./AppContext";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
-    const { user, setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery, getTotalItems } = useAppContext();
+    const { user, setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery, getTotalItems, axios, toast } = useAppContext();
 
-    const handleLogout = () => {
-        setUser(null);
-        setShowUserLogin(false);
-        navigate("/"); // Redirect to home page after logout
-        // Optionally, you can also redirect the user to the home page or login page
+    const handleLogout = async () => {
+        try {
+            const { data } = await axios.get('/api/user/logout')
+            if (data.success) {
+                toast.success(data.message);
+                setUser(null);
+                setShowUserLogin(false);     // Optionally, you can also redirect the user to the home page or login page
+                navigate("/"); // Redirect to home page after   
+
+            } else {
+                  toast.error(data.message);
+            }
+        } catch (error) {
+                 toast.error(error.message);
+        }
+
+
+
     };
 
     useEffect(() => {

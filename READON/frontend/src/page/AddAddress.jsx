@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { assets } from '../assets/assets';
+import { useAppContext } from '../components/AppContext';
+import { useEffect } from 'react';
 
 const InputField = ({ type, placeholder, name, handleChange, address }) => (
     <input
@@ -15,6 +17,8 @@ const InputField = ({ type, placeholder, name, handleChange, address }) => (
 );
 
 const AddAddress = () => {
+
+    const { axios, user, navigate, toast } = useAppContext();
     const [address, setAddress] = useState({
         firstName: '',
         lastName: '',
@@ -22,7 +26,7 @@ const AddAddress = () => {
         street: '',
         city: '',
         state: '',
-        pincode: '',
+        zipcode: '',
         country: '',
         phone: '',
     });
@@ -35,10 +39,33 @@ const AddAddress = () => {
         }));
     };
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
         // handle submission logic here
+        try {
+            const { data } = await axios.post('/api/address/add', {
+                address: address,
+                userId: user._id
+            });
+            if (data.success) {
+                toast.success(data.message);
+                navigate('/cart');
+
+            } else {
+                toast.error(data.message);
+            }
+
+        } catch (error) {
+            toast.error(error.message);
+
+        }
     };
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/cart')
+        }
+    }, [])
 
     return (
         <div className='mt-16 pb-16'>
@@ -65,13 +92,13 @@ const AddAddress = () => {
                                 type='text' placeholder='State' />
                         </div>
                         <div className='grid grid-cols-2 gap-4'>
-                            <InputField handleChange={handleChange} address={address} name='pincode'
+                            <InputField handleChange={handleChange} address={address} name='zipcode'
                                 type='number' placeholder='Pin Code' />
                             <InputField handleChange={handleChange} address={address} name='country'
                                 type='text' placeholder='Country' />
                         </div>
                         <InputField handleChange={handleChange} address={address} name='phone'
-                            type='number' placeholder='Phone No' />
+                            type='text' placeholder='Phone No' />
 
                         <button className=' w-full mt-6 bg-primary text-white py-3 
                         hover:bg-primary-dull transition cursor-pointer uppercase '>
