@@ -91,6 +91,11 @@ app.use(cors({
 // Root check
 app.get('/', (req, res) => res.send('✔ API running'));
 
+//  Health check route
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: '🟢 Server is healthy' });
+});
+
 // Routes
 app.use('/api/user', userRoutes);
 app.use('/api/seller', sellerRouter);
