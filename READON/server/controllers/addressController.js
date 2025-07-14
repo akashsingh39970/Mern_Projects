@@ -15,7 +15,7 @@ export const addAddress = async (req, res) =>{
 }
 
 
-// Get all addresses : /api/address/list.
+// Get all addresses : /api/address/list...
 
 export const getAddressList = async (req, res) => {
     try {
