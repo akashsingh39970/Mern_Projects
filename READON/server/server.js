@@ -71,32 +71,36 @@ dotenv.config();
 
 const app = express();
 
-// Connect to DB
-(async () => {
-  await connectDB();
-  await connectCloudinary();
-})();
-
-// Stripe webhook endpoint (needs to go before express.json middleware)
+// ✅ Move raw Stripe parser *before* JSON middleware
 app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks);
 
-// Middlewares
+// ✅ Remaining middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: [process.env.CLIENT_ORIGIN],
+  origin: process.env.CLIENT_ORIGIN || '*',
   credentials: true,
 }));
 
-// Root check
+// ✅ Connect to DB + Cloudinary
+(async () => {
+  try {
+    await connectDB();
+    await connectCloudinary();
+    console.log('✅ DB and Cloudinary connected');
+  } catch (err) {
+    console.error('❌ Failed to connect services:', err.message);
+  }
+})();
+
+// ✅ Basic routes
 app.get('/', (req, res) => res.send('✔ API running'));
 
-//  Health check route
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: '🟢 Server is healthy' });
 });
 
-// Routes
+// ✅ API Routes
 app.use('/api/user', userRoutes);
 app.use('/api/seller', sellerRouter);
 app.use('/api/product', productRouter);
@@ -104,5 +108,5 @@ app.use('/api/cart', cartRouter);
 app.use('/api/address', addressRouter);
 app.use('/api/order', orderRouter);
 
-// Export the app (important for Vercel)
+// ✅ Export for Vercel Serverless
 module.exports = app;
