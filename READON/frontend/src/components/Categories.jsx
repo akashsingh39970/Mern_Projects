@@ -1,5 +1,4 @@
-import React from 'react'
-import { assets, categories } from '../assets/assets'
+import { categories } from '../assets/assets'
 import { useAppContext } from './AppContext'
 
 
