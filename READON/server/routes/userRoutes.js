@@ -11,7 +11,7 @@ const { register, login, isAuth, logout } = controller; // Destructuring the imp
 
 
 
-console.log('✅ userRoutes file loaded'); // This 
+console.log('✅ userRoutes file loaded'); // This should show in your terminal
 
 const userRoutes = express.Router();
 
