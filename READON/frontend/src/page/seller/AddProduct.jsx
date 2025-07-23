@@ -36,7 +36,7 @@ const AddProduct = () => {
                 formData.append('images', files[i])
              }
 
-             const {data} = await axios.post('/api/product/add', formData)
+             const {data} = await axios.post(`${preocess.env.REACT_APP_API_URL}/api/product/add`, formData)
              
              if(data.success){
                 toast.success(data.message);

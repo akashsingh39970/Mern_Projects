@@ -9,7 +9,7 @@ const MyOrders = () => {
     const fetchMyOrders = async () => {
         // setMyOrders(dummyOrders)
         try {
-            const { data } = await axios.get("/api/order/user");
+            const { data } = await axios.get(`${preocess.env.REACT_APP_API_URL}/api/order/user`);
           
 
             if (data.success) {

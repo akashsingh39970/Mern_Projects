@@ -31,7 +31,7 @@ const CartPage = () => {
     //get user address by api
     const getUserAddress = async () =>{
         try {
-const { data } = await axios.get(`/api/address/get?userId=${user._id}`);
+const { data } = await axios.get(`${preocess.env.REACT_APP_API_URL}/api/address/get?userId=${user._id}`);
             if(data.success){
                 setAddress(data.addresses )
                 if(data.addresses.length  > 0 ){
@@ -56,7 +56,7 @@ const { data } = await axios.get(`/api/address/get?userId=${user._id}`);
 
             // payment mode type cod
             if(paymentMethod === 'COD'){
-                const {data} = await axios.post('/api/order/cod', {
+                const {data} = await axios.post(`${preocess.env.REACT_APP_API_URL}/api/order/cod`, {
                     userId: user._id,
                     items: cartArray.map(item => ({product: item._id, quantity: item.quantity})),
                     address: selectedAddress._id
@@ -72,7 +72,7 @@ const { data } = await axios.get(`/api/address/get?userId=${user._id}`);
             }
             else{
                 //pace order with stripe or online payment
-                 const {data} = await axios.post('/api/order/stripe', {
+                 const {data} = await axios.post(`${preocess.env.REACT_APP_API_URL}/api/order/stripe`, {
                     userId: user._id,
                     items: cartArray.map(item => ({product: item._id, quantity: item.quantity})),
                     address: selectedAddress._id
