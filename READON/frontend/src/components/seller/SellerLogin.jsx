@@ -10,7 +10,7 @@ const SellerLogin = () => {
       const onSumbitHandler = async (event) =>{
         try {
           event.preventDefault();
-          const {data} = await axios.post('/api/seller/login', {email, password })
+          const {data} = await axios.post( `${preocess.env.REACT_APP_API_URL}/api/seller/login`, {email, password })
         
           if(data.success){
             setIsSeller(true);

@@ -6,7 +6,7 @@ const ProductList = () => {
 
   const toggleStock = async (id, inStock) =>{
     try {
-        const {data} =  await axios.post('/api/product/stock', {id, inStock});
+        const {data} =  await axios.post(`${preocess.env.REACT_APP_API_URL}/api/product/stock`, {id, inStock});
         if (data.success){
             fetchProducts();
             toast.success(data.message);

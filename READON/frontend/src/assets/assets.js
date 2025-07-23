@@ -69,13 +69,13 @@ import vanilla_muffins_image from "./vanilla_muffins_image.png";
 import quinoa_image from "./quinoa_image.png";
 import brown_rice_image from "./brown_rice_image.png";
 import barley_image from "./barley_image.png";
-// import AcademicBooks from "./AcademicBooks.jpg";
-// import StorytellingBooks from "./StorytellingBooks.jpg";
-// import ExamPreparation from "./ExamPreparation.jpg";
-// import ChildrenBooks from "./ChildrenBooks.jpg";
-// import ReferenceMaterials from "./ReferenceMaterials.jpg";
-// import FictionNovels from "./FictionNovels.jpg";
-// import MagazinesJournals from "./MagazinesJournals.jpg";
+import AcademicBooks from "./AcademicBooks.jpg";
+import StorytellingBooks from "./StorytellingBooks.jpg";
+import ExamPreparation from "./ExamPreparation.jpg";
+import ChildrenBooks from "./ChildrenBooks.jpg";
+import ReferenceMaterials from "./ReferenceMaterials.jpg";
+import FictionNovels from "./FictionNovels.jpg";
+import MagazinesJournals from "./MagazinesJournals.jpg";
 export const assets = {
   logos,
   search_icon,
