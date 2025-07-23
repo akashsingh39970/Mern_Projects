@@ -1,16 +1,9 @@
-//   import express from 'express';
-//   import cookieParser from 'cookie-parser';
-//   import cors from 'cors';
-//   import dotenv from 'dotenv';
-//   import connectDB from './config/db.js';
-//   import userRoutes from './routes/userRoutes.js';
-//   import sellerRouter from './routes/sellerRoutes.js';
-//   import connectCloudinary from './config/cloudinary.js';
-//   import productRouter from './routes/productRoute.js';
-//   import cartRouter from './routes/cartRoute.js';
-//   import addressRouter from './routes/addressRoute.js';
-//   import orderRouter from './routes/orderRoutes.js';
-// import { stripeWebhooks } from './controllers/orderController.js';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import connectCloudinary from './config/cloudinary.js';
 
 //   dotenv.config();
 //   const app = express();
@@ -70,14 +63,16 @@ const { stripeWebhooks } = require('./controllers/orderController.js');
 dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 4000;
 
-// Connect to DB
-(async () => {
+// Connect to DB and Cloudinary before accepting requests
+const init = async () => {
   await connectDB();
   await connectCloudinary();
-})();
+};
+init();
 
-// Stripe webhook endpoint (needs to go before express.json middleware)
+// Stripe webhook endpoint (⚠️ must be before express.json)
 app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks);
 
 // Middlewares
@@ -88,7 +83,7 @@ app.use(cors({
   credentials: true,
 }));
 
-// Root check
+// Health check
 app.get('/', (req, res) => res.send('✔ API running'));
 
 // Routes
@@ -99,5 +94,7 @@ app.use('/api/cart', cartRouter);
 app.use('/api/address', addressRouter);
 app.use('/api/order', orderRouter);
 
-// Export the app (important for Vercel)
-module.exports = app;
+// Start the server
+app.listen(port, () => {
+  console.log(`🚀 Server running on http://localhost:${port}`);
+});
