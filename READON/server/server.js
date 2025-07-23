@@ -41,7 +41,7 @@
 //   app.use('/api/product', productRouter);// product routes
 //   app.use('/api/cart', cartRouter)// cart router
 //   app.use('/api/address', addressRouter)// address router
-//   app.use('/api/order', orderRouter)// order router
+//   app.use('/api/order', orderRouter)// order rout
 
 
 
