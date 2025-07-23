@@ -14,7 +14,7 @@ const Login = () => {
 const submitEventHandler = async (event) => {
 try {
     event.preventDefault();
-    const  {data} = await axios.post(`/api/user/${state}`,{name, email, password});
+    const  {data} = await axios.post(`${preocess.env.REACT_APP_API_URL}/api/user/${state}`,{name, email, password});
     if(data.success){
         navigate('/')
         setUser(data.user)
