@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 const Login = () => {
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/ping`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/ping`)
       .then((res) => {
         alert(res.data.message); // ✅ You should see the message in an alert
       })
@@ -33,7 +33,7 @@ const Login = () => {
 // const submitEventHandler = async (event) => {
 // try {
 //     event.preventDefault();
-//     const  {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/user/${state}`,{name, email, password});
+//     const  {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/${state}`,{name, email, password});
 //     if(data.success){
 //         navigate('/')
 //         setUser(data.user)
