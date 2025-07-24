@@ -34,8 +34,14 @@ app.use(cors({
   credentials: true,
 }));
 
+
+
 // Health check
 app.get('/', (req, res) => res.send('✔ API running'));
+
+app.get('/api/ping', (req, res) => {
+  res.json({ success: true, message: 'Frontend-backend connection working!' });
+});
 
 // Routes
 app.use('/api/user', userRoutes);
