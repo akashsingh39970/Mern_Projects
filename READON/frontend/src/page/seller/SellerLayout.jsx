@@ -16,7 +16,7 @@ const SellerLayout = () => {
     ];
     const logout = async () => {
         try {
-            const { data } = await axios.get(`${preocess.env.REACT_APP_API_URL}/api/seller/logout`);
+            const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/seller/logout`);
             if (data.success) {
                 toast.success(data.message)
                 navigate('/')
