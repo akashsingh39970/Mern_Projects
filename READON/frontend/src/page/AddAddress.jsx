@@ -43,7 +43,7 @@ const AddAddress = () => {
         e.preventDefault();
         // handle submission logic here
         try {
-            const { data } = await axios.post(`${preocess.env.REACT_APP_API_URL}/api/address/add`, {
+            const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/address/add`, {
                 address: address,
                 userId: user._id
             });
