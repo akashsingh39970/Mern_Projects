@@ -10,7 +10,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            const { data } = await axios.get(`${preocess.env.REACT_APP_API_URL}/api/user/logout`)
+            const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/logout`)
             if (data.success) {
                 toast.success(data.message);
                 setUser(null);
