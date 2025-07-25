@@ -36,7 +36,7 @@ const AddProduct = () => {
                 formData.append('images', files[i])
              }
 
-             const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/product/add`, formData)
+             const {data} = await axios.post('/api/product/add', formData)
              
              if(data.success){
                 toast.success(data.message);
