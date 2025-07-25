@@ -10,7 +10,7 @@ const SellerLogin = () => {
       const onSumbitHandler = async (event) =>{
         try {
           event.preventDefault();
-          const {data} = await axios.post( `${import.meta.env.VITE_BACKEND_URL}/api/seller/login`, {email, password })
+          const {data} = await axios.post( '/api/seller/login', {email, password })
         
           if(data.success){
             setIsSeller(true);
