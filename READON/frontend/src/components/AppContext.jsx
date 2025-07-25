@@ -26,7 +26,7 @@ export const AppContextProvider = ({ children }) => {
     //fetch seller auth status
     const fetchSeller = async () =>{
         try {
-            const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/seller/is-auth`);
+            const {data} = await axios.get('/api/seller/is-auth');
             if(data.success){
                 setIsSeller(true)
             }
@@ -41,7 +41,7 @@ export const AppContextProvider = ({ children }) => {
        //fetch user auth status, user data and cartitems
     const fetchUser = async () =>{
         try {
-            const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/is-auth`);
+            const {data} = await axios.get('/api/user/is-auth');
             if(data.success){
                 setUser(data.user)
                 setCartItems(data.user.cartItems)
@@ -61,7 +61,7 @@ export const AppContextProvider = ({ children }) => {
     const fetchProducts = async () => {
         // setProducts(dummyProducts)
         try {
-            const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/list`);
+            const {data} = await axios.get('/api/product/list');
             if(data.success){
                 setProducts(data.products)
             }
@@ -86,7 +86,7 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     const updateCart = async () => {
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/cart/update`, { userId: user._id, cartData: cartItems})
+            const { data } = await axios.post('/api/cart/update', { userId: user._id, cartData: cartItems})
             if (!data.success) {
                 toast.error(data.message);
             }
