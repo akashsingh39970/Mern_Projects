@@ -43,7 +43,7 @@ const AddAddress = () => {
         e.preventDefault();
         // handle submission logic here
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/address/add`, {
+            const { data } = await axios.post('/api/address/add', {
                 address: address,
                 userId: user._id
             });
