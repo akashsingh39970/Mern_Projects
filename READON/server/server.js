@@ -1,9 +1,9 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import connectDB from './config/db.js';
-import connectCloudinary from './config/cloudinary.js';
+// import express from 'express';
+// import cookieParser from 'cookie-parser';
+// import cors from 'cors';
+// import dotenv from 'dotenv';
+// import connectDB from './config/db.js';
+// import connectCloudinary from './config/cloudinary.js';
 
 //   dotenv.config();
 //   const app = express();
